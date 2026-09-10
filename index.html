@@ -1,1 +1,593 @@
-maisondesfleurs
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Maison Des Fleurs | Florería Boutique</title>
+    <meta name="title" content="Maison Des Fleurs | Florería Boutique">
+    <meta name="description" content="Arreglos florales exclusivos, ramos de rosas, tulipanes y detalles especiales.">
+
+    <!-- METATAGS Y MINIATURA PARA REDES SOCIALES -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Maison Des Fleurs">
+    <meta property="og:title" content="Maison Des Fleurs | Florería Boutique">
+    <meta property="og:description" content="Arreglos florales exclusivos y envíos a domicilio al instante.">
+    <meta property="og:url" content="https://ventalista.lat/maisondesfleurs/">
+
+    <meta property="og:image" content="https://qrdigital.github.io/maisondesfleurs/logodemoflores.jpg">
+    <meta property="og:image:secure_url" content="https://qrdigital.github.io/maisondesfleurs/logodemoflores.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="600">
+    <meta property="og:image:height" content="600">
+
+    <link rel="shortcut icon" href="https://qrdigital.github.io/maisondesfleurs/logodemoflores.jpg" type="image/jpeg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <base href="https://qrdigital.github.io/maisondesfleurs/">
+
+    <style>
+        :root {
+            --ink: #221f1f;
+            --muted: #6e6767;
+            --line: #ebdcdb;
+            --soft: #fdfbfb;
+            --rose: #8f2d56;
+            --rose-light: #fbf0f4;
+            --wa: #25D366;
+            --radius: 18px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background: #fcf9f9;
+            color: var(--ink);
+            padding-bottom: 100px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img { display: block; max-width: 100%; }
+        button, input, select, textarea { font-family: inherit; }
+
+        .container { width: min(1180px, calc(100% - 40px)); margin: auto; }
+
+        .hero { background: #fff; border-bottom: 1px solid var(--line); }
+        .hero-banner-wrap { width: 100%; background: #221f1f; }
+        .hero-image { width: 100%; height: auto; max-height: 380px; object-fit: cover; display: block; }
+
+        .business-info { padding: 20px 0; }
+        .business-top { display: flex; align-items: center; gap: 16px; }
+        .business-logo {
+            width: 80px; height: 80px; object-fit: cover; border-radius: 50%;
+            border: 3px solid #fff; box-shadow: 0 8px 20px rgba(143,45,86,.12); background: #fff;
+        }
+        .business-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 4vw, 38px); font-weight: 700; color: var(--rose); }
+        .business-description { font-size: 14px; color: var(--muted); margin-top: 2px; }
+
+        .business-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; align-items: center; }
+        .meta-item {
+            background: var(--rose-light); border: 1px solid #f2d6e2; border-radius: 999px;
+            padding: 8px 14px; font-size: 13px; color: var(--rose); font-weight: 600;
+        }
+
+        .section { padding: 24px 0; }
+        .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(24px, 3.5vw, 32px); font-weight: 700; margin-bottom: 16px; color: var(--ink); }
+
+        .products-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+        .product-card {
+            background: white; border-radius: 18px; overflow: hidden;
+            border: 1px solid var(--line); box-shadow: 0 2px 10px rgba(0,0,0,.02);
+            transition: transform .22s ease, box-shadow .22s ease; cursor: pointer;
+        }
+        .product-card:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(143,45,86,.1); border-color: var(--rose); }
+        .product-img { width: 100%; height: 230px; object-fit: cover; background: #fff; }
+        .product-content { padding: 16px; }
+        .product-name { font-size: 16px; font-weight: 700; color: var(--ink); }
+        .product-description { color: var(--muted); font-size: 13px; margin-top: 4px; line-height: 1.4; }
+        .product-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; }
+        .product-price { font-size: 17px; font-weight: 700; color: var(--rose); }
+        .add-button { background: var(--rose); color: white; border: 0; border-radius: 10px; padding: 8px 14px; font-weight: 600; font-size: 12px; }
+
+        .cart-floating {
+            position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%);
+            width: min(620px, calc(100% - 32px)); background: var(--ink); color: white;
+            border-radius: 16px; padding: 13px 18px; z-index: 100; display: flex;
+            justify-content: space-between; align-items: center; box-shadow: 0 14px 38px rgba(0,0,0,.25); cursor: pointer;
+        }
+        .cart-total { font-weight: 700; font-size: 16px; color: #fff; }
+
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(34, 31, 31, 0.65);
+            backdrop-filter: blur(6px); z-index: 200; display: none; align-items: center; justify-content: center; padding: 15px;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal { background: white; width: min(580px, 100%); max-height: 90vh; overflow-y: auto; border-radius: 22px; padding: 24px; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .close-button { width: 36px; height: 36px; border-radius: 50%; border: 0; background: #f8f1f1; cursor: pointer; font-size: 18px; }
+
+        .modal-product { display: flex; gap: 16px; margin-bottom: 20px; }
+        .modal-product img { width: 110px; height: 110px; border-radius: 14px; object-fit: cover; }
+
+        .option-group { margin-top: 16px; }
+        .option-title { font-weight: 700; margin-bottom: 8px; font-size: 14px; color: var(--rose); }
+
+        .options-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+        .opt-btn {
+            border: 1px solid var(--line); padding: 10px; border-radius: 10px;
+            text-align: center; cursor: pointer; font-size: 13px; font-weight: 600; background: #fff;
+        }
+        .opt-btn.active { border-color: var(--rose); background: var(--rose-light); color: var(--rose); }
+
+        .extra-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; margin-bottom: 6px; font-size: 13px; cursor: pointer;
+        }
+        .extra-item input { margin-right: 8px; accent-color: var(--rose); }
+
+        .quantity-selector { display: flex; align-items: center; gap: 12px; margin-top: 20px; }
+        .quantity-selector button { width: 36px; height: 36px; border: 0; background: #f8f1f1; border-radius: 8px; cursor: pointer; font-weight: bold; }
+
+        .modal-add-button {
+            width: 100%; background: var(--rose); color: white; border: 0;
+            border-radius: 12px; padding: 14px; margin-top: 20px; font-weight: 700; font-size: 15px; cursor: pointer;
+        }
+
+        .cart-item { border-bottom: 1px solid var(--line); padding: 12px 0; }
+        .cart-item-top { display: flex; justify-content: space-between; }
+        .cart-item-details { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+        .summary { margin-top: 16px; border-top: 1px solid var(--line); padding-top: 12px; }
+        .summary-line { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 14px; }
+        .summary-total { font-size: 18px; font-weight: 700; color: var(--rose); }
+
+        .form-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .form-group { margin-top: 10px; }
+        .form-group label { display: block; font-size: 12px; font-weight: 700; margin-bottom: 4px; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; border: 1px solid var(--line); border-radius: 8px; padding: 9px; font-size: 13px; }
+
+        .whatsapp-order { width: 100%; background: var(--wa); color: white; border: 0; border-radius: 12px; padding: 14px; margin-top: 16px; font-size: 15px; font-weight: 700; cursor: pointer; }
+
+        @media (max-width: 900px) { .products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+        @media (max-width: 500px) { .products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } .product-img { height: 160px; } .form-row { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="hero-banner-wrap">
+            <img class="hero-image" src="https://qrdigital.github.io/maisondesfleurs/bannerdemoflores.jpg" alt="Banner Maison Des Fleurs">
+        </div>
+        <div class="container business-info">
+            <div class="business-top">
+                <img class="business-logo" src="https://qrdigital.github.io/maisondesfleurs/logodemoflores.jpg" alt="Logo Maison Des Fleurs">
+                <div>
+                    <h1 class="business-name">Maison Des Fleurs</h1>
+                    <p class="business-description">Florería Boutique & Diseños Exclusivos</p>
+                </div>
+            </div>
+            <div class="business-meta">
+                <div class="meta-item">💐 Flores Frescas Seleccionadas</div>
+                <div class="meta-item">🚚 Envíos programados a domicilio</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="section">
+            <h2 class="section-title">Colección Floral</h2>
+            <div class="products-grid" id="productsGrid"></div>
+        </section>
+    </main>
+
+    <div class="cart-floating" onclick="openCart()">
+        <div>
+            <strong style="display:block; font-size:14px;">Mi Pedido</strong>
+            <span id="cartCount" style="font-size:12px; color:#d1d5db;">0 ítems</span>
+        </div>
+        <div class="cart-total" id="floatingTotal">S/ 0.00</div>
+    </div>
+
+    <div class="modal-overlay" id="productModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modalProductName" style="font-family:'Cormorant Garamond', serif; font-size:24px;">Producto</h2>
+                <button class="close-button" onclick="closeModal('productModal')">×</button>
+            </div>
+
+            <div class="modal-product">
+                <img id="modalProductImage" src="" alt="">
+                <div>
+                    <p id="modalProductDescription" style="color:var(--muted); font-size:13px;"></p>
+                    <strong id="modalProductPrice" style="display:block; margin-top:8px; font-size:18px; color:var(--rose);"></strong>
+                </div>
+            </div>
+
+            <div class="option-group" id="presentationGroup">
+                <div class="option-title">1. Selecciona el Tamaño / Presentación</div>
+                <div class="options-grid" id="presentationContainer"></div>
+            </div>
+
+            <div class="option-group" id="extrasGroup">
+                <div class="option-title">2. Añade un Detalle Especial</div>
+                <div id="extrasContainer"></div>
+            </div>
+
+            <div class="quantity-selector">
+                <button type="button" onclick="changeModalQuantity(-1)">−</button>
+                <span id="modalQuantity" style="font-weight:700;">1</span>
+                <button type="button" onclick="changeModalQuantity(1)">+</button>
+            </div>
+
+            <button class="modal-add-button" onclick="addToCart()">Agregar al Carrito</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="cartModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 style="font-family:'Cormorant Garamond', serif; font-size:24px;">Datos del Envío</h2>
+                <button class="close-button" onclick="closeModal('cartModal')">×</button>
+            </div>
+
+            <div id="cartItems"></div>
+
+            <div class="summary">
+                <div class="summary-line">
+                    <span>Subtotal</span>
+                    <strong id="summarySubtotal">S/ 0.00</strong>
+                </div>
+                <div class="summary-line">
+                    <span>Envío</span>
+                    <strong id="summaryDelivery">S/ 0.00</strong>
+                </div>
+                <div class="summary-line summary-total">
+                    <span>Total</span>
+                    <strong id="summaryTotal">S/ 0.00</strong>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Tipo de Entrega</label>
+                <select id="deliveryOption" onchange="updateDelivery()">
+                    <option value="Delivery">🚚 Delivery a Domicilio (+ S/ 15.00)</option>
+                    <option value="Recojo">📍 Recojo en Boutique (Gratis)</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Quien envía (Tu Nombre)</label>
+                    <input type="text" id="senderName" placeholder="Ej. Ricardo Pérez">
+                </div>
+                <div class="form-group">
+                    <label>Quien recibe</label>
+                    <input type="text" id="receiverName" placeholder="Ej. María López">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Fecha de Entrega</label>
+                    <input type="date" id="deliveryDate">
+                </div>
+                <div class="form-group">
+                    <label>Horario Preferente</label>
+                    <select id="deliveryTime">
+                        <option value="Mañana (9:00 AM - 1:00 PM)">Mañana (9:00 AM - 1:00 PM)</option>
+                        <option value="Tarde (2:00 PM - 7:00 PM)">Tarde (2:00 PM - 7:00 PM)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Dirección de Entrega</label>
+                <input type="text" id="deliveryAddress" placeholder="Av. Los Olivos 123, Dpto 402">
+            </div>
+
+            <div class="form-group">
+                <label>Dedicatoria para la Tarjeta (Gratis)</label>
+                <textarea id="cardMessage" rows="3" placeholder="Escribe el mensaje que irá impreso en la tarjeta..."></textarea>
+            </div>
+
+            <button class="whatsapp-order" onclick="sendOrderWhatsApp()">Enviar Pedido por WhatsApp</button>
+        </div>
+    </div>
+
+<script>
+const CDN_BASE = "https://qrdigital.github.io/maisondesfleurs/";
+
+const catalog = [
+    {
+        id: 1,
+        name: "Box Sombrerera Rosas Rojas",
+        desc: "Exclusiva caja cilíndrica con finas rosas rojas seleccionadas.",
+        img: CDN_BASE + "rosasdemo2.jpg",
+        presentations: [
+            { name: "Mediana (24 Rosas)", price: 140.00 },
+            { name: "Grande (50 Rosas)", price: 230.00 }
+        ]
+    },
+    {
+        id: 2,
+        name: "Caja Elegance de Rosas",
+        desc: "Arreglo alargado estilo boutique en caja rectangular de lujo.",
+        img: CDN_BASE + "rosasdemo1.jpg",
+        presentations: [
+            { name: "Caja Estándar (18 Rosas)", price: 120.00 },
+            { name: "Caja Deluxe (24 Rosas)", price: 155.00 }
+        ]
+    },
+    {
+        id: 3,
+        name: "Box Tulipanes Holandeses",
+        desc: "Lindo arreglo de tulipanes frescos en tonos multicolor.",
+        img: CDN_BASE + "tulipanesdemo1.jpg",
+        presentations: [
+            { name: "10 Tulipanes", price: 110.00 },
+            { name: "20 Tulipanes", price: 190.00 }
+        ]
+    },
+    {
+        id: 4,
+        name: "Envoltura Estilo Coreano Tulipanes",
+        desc: "Ramoenvuelto en finos papeles importados y cinta de seda.",
+        img: CDN_BASE + "tulipanesdemo2.jpg",
+        presentations: [
+            { name: "Ramo Estándar", price: 95.00 },
+            { name: "Ramo Premium", price: 145.00 }
+        ]
+    },
+    {
+        id: 5,
+        name: "Arreglo Floral Mix Silvestre",
+        desc: "Combinación de gerberas, liliums y flores de estación en base blanca.",
+        img: CDN_BASE + "arreglodemo1.jpg",
+        presentations: [
+            { name: "Tamaño Mediano", price: 115.00 },
+            { name: "Tamaño Grande", price: 160.00 }
+        ]
+    },
+    {
+        id: 6,
+        name: "Box Pastel de Rosas & Flores",
+        desc: "Tonos delicados rosados y blancos en caja sombrerera decorada.",
+        img: CDN_BASE + "arreglodemo2.jpg",
+        presentations: [
+            { name: "Caja Mediana", price: 130.00 },
+            { name: "Caja Grande", price: 180.00 }
+        ]
+    }
+];
+
+const globalExtras = [
+    { id: 'peluche', name: 'Oso de Peluche Abrazable', price: CDN_BASE + 'peluchedemo1.jpg', cost: 35.00 },
+    { id: 'chocolates', name: 'Caja Ferrero Rocher (8 unid)', cost: 25.00 },
+    { id: 'globo', name: 'Globo Metálico de Celebración', cost: 12.00 }
+];
+
+let cart = [];
+let selectedProduct = null;
+let selectedPresentation = null;
+let selectedExtras = [];
+let modalQuantity = 1;
+
+function renderCatalog() {
+    const grid = document.getElementById('productsGrid');
+    grid.innerHTML = catalog.map(p => `
+        <article class="product-card" onclick="openProductModal(${p.id})">
+            <img class="product-img" src="${p.img}" alt="${p.name}">
+            <div class="product-content">
+                <h3 class="product-name">${p.name}</h3>
+                <p class="product-description">${p.desc}</p>
+                <div class="product-bottom">
+                    <div class="product-price">S/ ${p.presentations[0].price.toFixed(2)}</div>
+                    <button class="add-button">Ver Arreglo</button>
+                </div>
+            </div>
+        </article>
+    `).join('');
+}
+
+function openProductModal(id) {
+    selectedProduct = catalog.find(x => x.id === id);
+    selectedPresentation = selectedProduct.presentations[0];
+    selectedExtras = [];
+    modalQuantity = 1;
+
+    document.getElementById('modalProductName').textContent = selectedProduct.name;
+    document.getElementById('modalProductDescription').textContent = selectedProduct.desc;
+    document.getElementById('modalProductImage').src = selectedProduct.img;
+
+    renderModalOptions();
+    updateModalPrice();
+
+    document.getElementById('productModal').classList.add('active');
+}
+
+function renderModalOptions() {
+    const presWrap = document.getElementById('presentationContainer');
+    presWrap.innerHTML = selectedProduct.presentations.map((p, idx) => `
+        <button class="opt-btn ${selectedPresentation.name === p.name ? 'active' : ''}" onclick="selectPresentation(${idx})">
+            ${p.name}<br><strong>S/ ${p.price.toFixed(2)}</strong>
+        </button>
+    `).join('');
+
+    const extWrap = document.getElementById('extrasContainer');
+    extWrap.innerHTML = globalExtras.map(e => `
+        <label class="extra-item">
+            <span>
+                <input type="checkbox" onchange="toggleExtra('${e.id}')" ${selectedExtras.includes(e.id) ? 'checked' : ''}>
+                ${e.name}
+            </span>
+            <strong>+ S/ ${e.cost.toFixed(2)}</strong>
+        </label>
+    `).join('');
+}
+
+function selectPresentation(index) {
+    selectedPresentation = selectedProduct.presentations[index];
+    renderModalOptions();
+    updateModalPrice();
+}
+
+function toggleExtra(extraId) {
+    if (selectedExtras.includes(extraId)) {
+        selectedExtras = selectedExtras.filter(x => x !== extraId);
+    } else {
+        selectedExtras.push(extraId);
+    }
+    updateModalPrice();
+}
+
+function updateModalPrice() {
+    let unitPrice = selectedPresentation.price;
+    selectedExtras.forEach(eId => {
+        const ext = globalExtras.find(x => x.id === eId);
+        if (ext) unitPrice += ext.cost;
+    });
+
+    document.getElementById('modalProductPrice').textContent = `S/ ${(unitPrice * modalQuantity).toFixed(2)}`;
+    document.getElementById('modalQuantity').textContent = modalQuantity;
+}
+
+function changeModalQuantity(delta) {
+    modalQuantity = Math.max(1, modalQuantity + delta);
+    updateModalPrice();
+}
+
+function addToCart() {
+    let unitPrice = selectedPresentation.price;
+    let extraNames = [];
+
+    selectedExtras.forEach(eId => {
+        const ext = globalExtras.find(x => x.id === eId);
+        if (ext) {
+            unitPrice += ext.cost;
+            extraNames.push(ext.name);
+        }
+    });
+
+    cart.push({
+        id: Date.now(),
+        name: selectedProduct.name,
+        presentation: selectedPresentation.name,
+        extras: extraNames,
+        price: unitPrice,
+        qty: modalQuantity
+    });
+
+    closeModal('productModal');
+    updateCartUI();
+}
+
+function updateCartUI() {
+    const totalItems = cart.reduce((s, item) => s + item.qty, 0);
+    const subtotal = cart.reduce((s, item) => s + (item.price * item.qty), 0);
+
+    document.getElementById('cartCount').textContent = `${totalItems} ${totalItems === 1 ? 'ítem' : 'ítems'}`;
+    document.getElementById('floatingTotal').textContent = `S/ ${subtotal.toFixed(2)}`;
+    renderCartItems();
+}
+
+function renderCartItems() {
+    const wrap = document.getElementById('cartItems');
+    if (!cart.length) {
+        wrap.innerHTML = '<p style="color:var(--muted); font-size:14px;">Tu carrito está vacío.</p>';
+        return;
+    }
+
+    wrap.innerHTML = cart.map(item => `
+        <div class="cart-item">
+            <div class="cart-item-top">
+                <strong>${item.name} (${item.presentation}) x${item.qty}</strong>
+                <span>S/ ${(item.price * item.qty).toFixed(2)}</span>
+            </div>
+            <div class="cart-item-details">
+                ${item.extras.length ? `Detalles: ${item.extras.join(', ')}<br>` : ''}
+                <button onclick="removeCartItem(${item.id})" style="color:red; border:0; background:none; cursor:pointer; font-size:11px; margin-top:4px;">Eliminar</button>
+            </div>
+        </div>
+    `).join('');
+
+    updateDelivery();
+}
+
+function removeCartItem(id) {
+    cart = cart.filter(x => x.id !== id);
+    updateCartUI();
+}
+
+function updateDelivery() {
+    const subtotal = cart.reduce((s, item) => s + (item.price * item.qty), 0);
+    const isDelivery = document.getElementById('deliveryOption').value === 'Delivery';
+    const deliveryCost = isDelivery ? 15 : 0;
+
+    document.getElementById('summarySubtotal').textContent = `S/ ${subtotal.toFixed(2)}`;
+    document.getElementById('summaryDelivery').textContent = `S/ ${deliveryCost.toFixed(2)}`;
+    document.getElementById('summaryTotal').textContent = `S/ ${(subtotal + deliveryCost).toFixed(2)}`;
+}
+
+function openCart() {
+    updateCartUI();
+    document.getElementById('cartModal').classList.add('active');
+}
+
+function closeModal(modalId) {
+    document.getElementById(modalId).classList.remove('active');
+}
+
+function sendOrderWhatsApp() {
+    if (!cart.length) {
+        alert('Agrega al menos un arreglo floral.');
+        return;
+    }
+
+    const sender = document.getElementById('senderName').value.trim();
+    const receiver = document.getElementById('receiverName').value.trim();
+    const date = document.getElementById('deliveryDate').value;
+    const time = document.getElementById('deliveryTime').value;
+    const address = document.getElementById('deliveryAddress').value.trim();
+    const message = document.getElementById('cardMessage').value.trim();
+    const deliveryType = document.getElementById('deliveryOption').value;
+    const isDelivery = deliveryType === 'Delivery';
+    const deliveryCost = isDelivery ? 15 : 0;
+    const subtotal = cart.reduce((s, item) => s + (item.price * item.qty), 0);
+    const total = subtotal + deliveryCost;
+
+    const itemsText = cart.map(item => {
+        let line = `• ${item.qty}x ${item.name} (${item.presentation})`;
+        if (item.extras.length) line += `\n   + Detalle: ${item.extras.join(', ')}`;
+        line += ` — S/ ${(item.price * item.qty).toFixed(2)}`;
+        return line;
+    }).join('\n\n');
+
+    const text = [
+        '💐 *NUEVO PEDIDO - MAISON DES FLEURS*',
+        '',
+        itemsText,
+        '',
+        `*Subtotal:* S/ ${subtotal.toFixed(2)}`,
+        `*Envío:* ${isDelivery ? 'S/ 15.00 (Delivery)' : 'Gratis (Recojo en Boutique)'}`,
+        `*TOTAL A PAGAR:* S/ ${total.toFixed(2)}`,
+        '',
+        sender ? `*De (Remitente):* ${sender}` : '',
+        receiver ? `*Para (Destinatario):* ${receiver}` : '',
+        date ? `*Fecha de Entrega:* ${date}` : '',
+        time ? `*Turno:* ${time}` : '',
+        address ? `*Dirección:* ${address}` : '',
+        message ? `*Mensaje Tarjeta:* "${message}"` : ''
+    ].filter(Boolean).join('\n');
+
+    window.open(`https://wa.me/51920832884?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderCatalog();
+});
+</script>
+</body>
+</html>
